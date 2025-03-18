@@ -1,69 +1,310 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeaveKart - Home</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <title>WeaveKart - Handloom Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-
 <body>
-    <!-- Header -->
     <header>
-        <nav>
-            <!-- <img src="assets/images/weavekart_logo.jpg" alt="WeaveKart Logo" width="120"> -->
-            <div class="left">
+        <div class="header-top">
+            <div class="logo">
                 <img src="assets/images/weavekart_logo.jpg" alt="WeaveKart Logo">
-               
+                <h1>WeaveKart</h1>
             </div>
-            <div class="mid"> <h1>Welcome to WeaveKart</h1></div>
-            <div class="right">
+            <div class="search-bar">
+                <input type="text" placeholder="Search for handloom products...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-actions">
+                <a href="login.html"><i class="fas fa-user"></i> Login</a>
+                <a href="signup.html"><i class="fas fa-user-plus"></i> Sign Up</a>
+                <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a>
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart (0)</a>
+            </div>
+        </div>
+        <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="login.html">Login</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="sarees.html">Sarees</a></li>
+                <li><a href="fabrics.html">Fabrics</a></li>
+                <li><a href="dress-materials.html">Dress Materials</a></li>
+                <li><a href="home-decor.html">Home Decor</a></li>
+                <li><a href="new-arrivals.html">New Arrivals</a></li>
+                <li><a href="sale.html">Sale</a></li>
+                <li><a href="our-story.html">Our Story</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="about.html">About</a></li>
-
             </ul>
-        </div>
         </nav>
-    </header> 
+    </header>
 
-
-
-    <!-- Hero Section -->
     <section class="hero">
-        <!-- <h1>Welcome to WeaveKart</h1> -->
-        <p>Discover Authentic Handloom Clothing</p>
-        <a href="shop.html" class="btn">Shop Now</a>
+        <div class="hero-content">
+            <h2>Authentic Handloom Treasures</h2>
+            <p>Discover the elegance of traditional craftsmanship with our premium collection of handwoven products</p>
+            <a href="#featured" class="cta-button">Shop Now</a>
+        </div>
     </section>
 
-    <!-- Featured Products -->
-    <section class="featured">
-        <h2>Featured Products</h2>
-        <div class="product-list">
-            <div class="product">
-                <img src="assets/images/products/sample1.jpg" alt="Handloom Saree">
-                <h3>Handloom Saree</h3>
-                <p>Elegant and authentic handwoven saree.</p>
-                <a href="shop.html" class="btn">View Details</a>
+    <section class="categories">
+        <h2>Shop By Category</h2>
+        <div class="category-container">
+            <div class="category">
+                <img src="assets/images/silk-sarees.jpg" alt="Silk Sarees">
+                <h3>Silk Sarees</h3>
+                <a href="silk-sarees.html" class="category-link">View Collection</a>
             </div>
-
-            <div class="product">
-                <img src="assets/images/products/sample2.jpg" alt="Handloom Kurta">
-                <h3>Handloom Kurta</h3>
-                <p>Traditional Kurta made with love.</p>
-                <a href="shop.html" class="btn">View Details</a>
+            <div class="category">
+                <img src="assets/images/cotton-sarees.jpg" alt="Cotton Sarees">
+                <h3>Cotton Sarees</h3>
+                <a href="cotton-sarees.html" class="category-link">View Collection</a>
+            </div>
+            <div class="category">
+                <img src="assets/images/linen-sarees.jpg" alt="Linen Sarees">
+                <h3>Linen Sarees</h3>
+                <a href="linen-sarees.html" class="category-link">View Collection</a>
+            </div>
+            <div class="category">
+                <img src="assets/images/ikkat-sarees.jpg" alt="Ikkat Sarees">
+                <h3>Ikkat Sarees</h3>
+                <a href="ikkat-sarees.html" class="category-link">View Collection</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 WeaveKart. All Rights Reserved.</p>
-    </footer>
-</body>
+    <section id="featured" class="featured-products">
+        <h2>Featured Collection</h2>
+        <div class="product-grid">
+            <div class="product">
+                <div class="product-image">
+                    <img src="assets/images/pink-silk-saree.jpg" alt="Pink Silk Saree">
+                    <div class="overlay">
+                        <a href="product-details.html" class="quick-view">Quick View</a>
+                        <a href="cart.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <h3>Pink Glittering Handwoven Resham Silk Saree</h3>
+                <div class="product-price">
+                    <span class="original-price">₹7,999</span>
+                    <span class="sale-price">₹5,999</span>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span>(32)</span>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-image">
+                    <img src="assets/images/green-cotton-saree.jpg" alt="Green Cotton Saree">
+                    <div class="overlay">
+                        <a href="product-details.html" class="quick-view">Quick View</a>
+                        <a href="cart.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <h3>Elegant Green Handloom Cotton Saree</h3>
+                <div class="product-price">
+                    <span class="original-price">₹4,499</span>
+                    <span class="sale-price">₹3,699</span>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <span>(18)</span>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-image">
+                    <img src="assets/images/blue-linen-saree.jpg" alt="Blue Linen Saree">
+                    <div class="overlay">
+                        <a href="product-details.html" class="quick-view">Quick View</a>
+                        <a href="cart.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <h3>Traditional Blue Handloom Linen Saree</h3>
+                <div class="product-price">
+                    <span class="original-price">₹5,999</span>
+                    <span class="sale-price">₹4,299</span>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span>(42)</span>
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-image">
+                    <img src="assets/images/ikkat-saree.jpg" alt="Ikkat Saree">
+                    <div class="overlay">
+                        <a href="product-details.html" class="quick-view">Quick View</a>
+                        <a href="cart.html" class="add-to-cart">Add to Cart</a>
+                    </div>
+                </div>
+                <h3>Royal Blue Rani Pink Ikkat Silk Saree</h3>
+                <div class="product-price">
+                    <span class="original-price">₹8,499</span>
+                    <span class="sale-price">₹6,799</span>
+                </div>
+                <div class="rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                    <span>(27)</span>
+                </div>
+            </div>
+        </div>
+        <div class="view-more">
+            <a href="collections.html" class="view-more-btn">View All Collection</a>
+        </div>
+    </section>
 
-</html>
+    <section class="special-offers">
+        <h2>Special Offers</h2>
+        <div class="offers-container">
+            <div class="offer">
+                <img src="assets/images/festival-collection.jpg" alt="Festival Collection">
+                <div class="offer-content">
+                    <h3>Festival Collection</h3>
+                    <p>Up to 30% Off on Handloom Festival Sarees</p>
+                    <a href="festival-collection.html" class="offer-btn">Shop Now</a>
+                </div>
+            </div>
+            <div class="offer">
+                <img src="assets/images/wedding-collection.jpg" alt="Wedding Collection">
+                <div class="offer-content">
+                    <h3>Wedding Collection</h3>
+                    <p>Exclusive Bridal Sarees with 20% Discount</p>
+                    <a href="wedding-collection.html" class="offer-btn">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="artisan-story">
+        <div class="artisan-content">
+            <h2>Meet Our Artisans</h2>
+            <p>Each WeaveKart product is crafted by skilled artisans with generations of expertise in traditional weaving techniques. We work directly with weaver communities across India to bring authentic handloom products to your doorstep while ensuring fair wages for our craftspeople.</p>
+            <a href="our-artisans.html" class="artisan-btn">Learn More</a>
+        </div>
+        <div class="artisan-image">
+            <img src="assets/images/artisans.jpg" alt="Our Artisans">
+        </div>
+    </section>
+
+    <!-- <section class="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial-slider">
+            <div class="testimonial">
+                <div class="testimonial-image">
+                    <img src="assets/images/customer1.jpg" alt="Customer 1">
+                </div>
+                <div class="testimonial-content">
+                    <p>"The quality of WeaveKart sarees is exceptional. I've been a loyal customer for three years, and I'm always amazed by the craftsmanship and attention to detail."</p>
+                    <h4>Priya Sharma</h4>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-image">
+                    <img src="assets/images/customer2.jpg" alt="Customer 2">
+                </div>
+                <div class="testimonial-content">
+                    <p>"I purchased an Ikkat silk saree for my wedding and received countless compliments. The colors were vibrant and the fabric was luxurious. Highly recommended!"</p>
+                    <h4>Ananya Patel</h4>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </section> -->
+
+    <section class="subscribe">
+        <div class="subscribe-content">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for exclusive offers, new arrivals, and artisan stories</p>
+            <form class="subscribe-form">
+                <input type="email" placeholder="Your Email Address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>WeaveKart</h3>
+                <p>Empowering artisans and bringing authentic handloom products to customers worldwide since 2018.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="our-story.html">Our Story</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Care</h3>
+                <ul>
+                    <li><a href="shipping.html">Shipping Policy</a></li>
+                    <li><a href="returns.html">Return & Exchange</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Craft Street, Textile Hub, Chennai, Tamil Nadu, India</li>
+                    <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                    <li><i class="fas fa-envelope"></i> support@weavekart.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 WeaveKart. All Rights Reserved.</p>
+            <div class="payment-icons">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-amex"></i>
+            </div>
+        </div>
+        </footer>
