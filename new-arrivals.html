@@ -1,10 +1,10 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>WeaveKart - Handloom Products</title>
+    <title>WeaveKart - New Arrivals</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -27,9 +27,9 @@
         </div>
         <nav>
             <ul>
-                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="fabrics.html">Fabrics</a></li>
-                <li><a href="new-arrivals.html">New Arrivals</a></li>
+                <li><a href="new-arrivals.html" class="active">New Arrivals</a></li>
                 <li><a href="chatbot.html">Chatbot</a></li>
                 <li><a href="chat_with_weaver.html">Chat with weaver</a></li>
                 <li><a href="ourstory.html">Our story</a></li>
@@ -37,46 +37,48 @@
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h2>Authentic Handloom Treasures</h2>
-            <p>Discover the elegance of traditional craftsmanship with our premium collection of handwoven products</p>
-            <a href="#featured" class="cta-button">Shop Now</a>
-        </div>
+    <section class="page-banner">
+            <div class="banner-content">
+                <h1>New Arrivals</h1>
+                <p>Discover our latest handloom treasures crafted with love and tradition</p>
+            </div>
+
     </section>
 
-    <section class="categories">
-        <h2>Shop By Category</h2>
-        <div class="category-container">
-            <div class="category">
-                <img src="assets/images/silk-sarees.jpg" alt="Silk Sarees">
-                <h3>Silk Sarees</h3>
-                <a href="silk-sarees.html" class="category-link">View Collection</a>
-            </div>
-            <div class="category">
-                <img src="assets/images/cotton-sarees.jpg" alt="Cotton Sarees">
-                <h3>Cotton Sarees</h3>
-                <a href="cotton-sarees.html" class="category-link">View Collection</a>
-            </div>
-            <div class="category">
-                <img src="assets/images/linen-sarees.jpg" alt="Linen Sarees">
-                <h3>Linen Sarees</h3>
-                <a href="linen-sarees.html" class="category-link">View Collection</a>
-            </div>
-            <div class="category">
-                <img src="assets/images/ikkat-sarees.jpg" alt="Ikkat Sarees">
-                <h3>Ikkat Sarees</h3>
-                <a href="ikkat-sarees.html" class="category-link">View Collection</a>
+    <section class="new-arrivals-intro">
+        <div class="container">
+            <p class="intro-text">Welcome to our curated collection of newly arrived handloom masterpieces. Each piece tells a unique story of traditional craftsmanship blended with contemporary designs. Explore our latest additions from talented artisans across India.</p>
+            
+            <div class="filter-sort">
+                <div class="filter">
+                    <label for="category-filter">Filter by:</label>
+                    <select id="category-filter">
+                        <option value="all">All Categories</option>
+                        <option value="sarees">Sarees</option>
+                        <option value="fabrics">Fabrics</option>
+                        <option value="dress-materials">Dress Materials</option>
+                        <option value="home-decor">Home Decor</option>
+                    </select>
+                </div>
+                <div class="sort">
+                    <label for="sort-options">Sort by:</label>
+                    <select id="sort-options">
+                        <option value="newest">Newest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="popularity">Popularity</option>
+                    </select>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="featured" class="featured-products">
-        <h2>Featured Collection</h2>
+        <h2>New Collection</h2>
         <div class="product-grid">
             <div class="product">
                 <div class="product-image">
-                    <img src="assets/images/pink-silk-saree.jpg" alt="Pink Silk Saree">
+                    <img src="https://media-hosting.imagekit.io//f300b500fab546ce/Shubh-SF-1003_1_900x1350_crop_center@2x.jpg?Expires=1836988025&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=Q2p2jXW09WcBNWImFsg~FwaLGG~vrLjSqZuPnMN8aVUjCZ-jOoh86zn4Rp0DSwuACWMkXDvQmriWDZqSH6IfEu9F9JVgOH8IpE5l8uCVBOZyZ2wzTjfKnv-i0ta7M3H~uq3tw8P1oZbXaFykhWqsmLJDifFC2c5QHLWluRdtkuqSRzJAjVgdbof2PxikeV4A18NsvJSwrzXNf7pPQY83H07uTEpSXm1zqjZZ1wtLq9V-iR5wwDDta2MoUNBz8vwYRBhln3sOS1RlaEwPKfk0Nt5ao0xAAQrG6aaZ9tA2bnVa0J2vfoQD8VV1I7NgKKTEa7eDvvU02MtCQbVp9tegNg__" alt="Pink Silk Saree">
                     <div class="overlay">
                         <a href="product-details.html" class="quick-view">Quick View</a>
                         <a href="cart.html" class="add-to-cart">Add to Cart</a>
@@ -98,7 +100,7 @@
             </div>
             <div class="product">
                 <div class="product-image">
-                    <img src="assets/images/green-cotton-saree.jpg" alt="Green Cotton Saree">
+                    <img src="https://media-hosting.imagekit.io//cf36345ade6d4edb/Elegant-Kanchi-Cotton-Parutti-Butta-Tall-Border-Weavemaya-Bangalore-India-Maya-Bottle-Green-8122033-4.jpg?Expires=1836988122&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=qRzjBRzASfNMWc-oYw4G808IiLwE7578kOPfT-s-CzhbkFQvEVKsjBzwD91mAFLvx1mKkKzZJV90MQ-tKmtY5fE7QQAm749KQ9PAnME1Siigc2Lj4mu9LW-DxjgW~ulwNE0PNvrOkS9jZs9QNhCaT26GWZzbu1ZwS8DgjG9MbM5NQX7LnEuo4EF7a-cMam87jGtjpLTmDUfzeZTx9aITiLItjpDJA5badxC24b0vi4yGAzu3c3YfTHsNDejInhv3wbgKPqVCgLKuy76CMwzqMElMz1vPmjIcd7T3zVdA5VJIrO~SKetpe~TCcOTL7sEtjFuQh4oitTESGHPirSf93g__" alt="Green Cotton Saree">
                     <div class="overlay">
                         <a href="product-details.html" class="quick-view">Quick View</a>
                         <a href="cart.html" class="add-to-cart">Add to Cart</a>
@@ -120,7 +122,7 @@
             </div>
             <div class="product">
                 <div class="product-image">
-                    <img src="assets/images/blue-linen-saree.jpg" alt="Blue Linen Saree">
+                    <img src="https://media-hosting.imagekit.io//8ca7f18ab8cc4858/shopping.webp?Expires=1836988258&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=eoiHJNacjMmJvDa~kh9mgQnyoyx~10IXlTZ6pfx8HEwT9Cvg9XWaMDoRIJAo3cMd8PIBn9-oMSI3b5Ywrx6vwge2rVuli0O4ocYjCj7vgvDrdJZZTTJBjBv4DH3UT3enqOwGFBlNsOW6WbWSUuUjUhCWIRf6eIIE51BfU~cLFz5BBHGPN6fN0vQvGVrjVj0p0fpoRHoTHlHEaB1gZheVpLi6Sl7IAF3OgdtumSIL9BkpNNCHSp4~Igih-G-Arubkxyih2mEtpkP8qQJMQwiFQQ52TPjyrhoik45V9KE81t2B5UxUjEyr4a9pwksN5GLkf88MlIg0FmQD0BRZIS2MTw__" alt="Blue Linen Saree">
                     <div class="overlay">
                         <a href="product-details.html" class="quick-view">Quick View</a>
                         <a href="cart.html" class="add-to-cart">Add to Cart</a>
@@ -142,7 +144,7 @@
             </div>
             <div class="product">
                 <div class="product-image">
-                    <img src="assets/images/ikkat-sarees(1).jpg" alt="Ikkat Saree">
+                    <img src="https://media-hosting.imagekit.io//5df5ff06635f405c/shopping.webp?Expires=1836988297&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=vQ5DAudZz0ee6GEiHi9kH8~sJ5UhJhKC6u950seapK6SJQhzmSYBzZ0cAtkc~U5bvyL3HMhpryiX3kQqAj~EGBbhpT~OkovHe6pZQHhibPIhMNhoUrxydsXrw26Fge1s5FOVB2NWAKzyncttRtlJJXER4oHMK2CazSKX9g76sktr5D2sTHEQoV0iUN4BrHNsJYJ7aPsZd--vaqRhY5ynUK6eD6TwSqcjitHCZx3FvOGL38142h75uDnnzwYU1CQ1c5sfoJGOebvi-Vz9yHj1ixvXg9hoHsYSV2eAALQjmYp~nICAQ7e2E78AkiCzE~arBTs0NVeICPZcBwhO2C9K7Q__" alt="Ikkat Saree">
                     <div class="overlay">
                         <a href="product-details.html" class="quick-view">Quick View</a>
                         <a href="cart.html" class="add-to-cart">Add to Cart</a>
@@ -163,86 +165,16 @@
                 </div>
             </div>
         </div>
-        <div class="view-more">
-            <a href="collections.html" class="view-more-btn">View All Collection</a>
-        </div>
     </section>
 
-    <section class="special-offers">
-        <h2>Special Offers</h2>
-        <div class="offers-container">
-            <div class="offer">
-                <img src="assets/images/festival-collection.jpg" alt="Festival Collection">
-                <div class="offer-content">
-                    <h3>Festival Collection</h3>
-                    <p>Up to 30% Off on Handloom Festival Sarees</p>
-                    <a href="festival-collection.html" class="offer-btn">Shop Now</a>
-                </div>
-            </div>
-            <div class="offer">
-                <img src="assets/images/wedding-collection.jpg" alt="Wedding Collection">
-                <div class="offer-content">
-                    <h3>Wedding Collection</h3>
-                    <p>Exclusive Bridal Sarees with 20% Discount</p>
-                    <a href="wedding-collection.html" class="offer-btn">Shop Now</a>
-                </div>
+    <section class="coming-soon">
+        <div class="container">
+            <div class="coming-soon-content">
+                <h2>Coming Soon</h2>
+                <p>Stay tuned for our upcoming exclusive collection of handwoven treasures from different regions of India. Sign up for our newsletter to be the first to know when they arrive!</p>
             </div>
         </div>
     </section>
-
-    <section class="artisan-story">
-        <div class="artisan-content">
-            <h2>Meet Our Artisans</h2>
-            <p>Each WeaveKart product is crafted by skilled artisans with generations of expertise in traditional weaving techniques. We work directly with weaver communities across India to bring authentic handloom products to your doorstep while ensuring fair wages for our craftspeople.</p>
-            <a href="our-artisans.html" class="artisan-btn">Learn More</a>
-        </div>
-        <div class="artisan-image">
-            <img src="assets/images/artisans.jpg" alt="Our Artisans">
-        </div>
-    </section>
-
-    <!-- <section class="testimonials">
-        <h2>What Our Customers Say</h2>
-        <div class="testimonial-slider">
-            <div class="testimonial">
-                <div class="testimonial-image">
-                    <img src="assets/images/customer1.jpg" alt="Customer 1">
-                </div>
-                <div class="testimonial-content">
-                    <p>"The quality of WeaveKart sarees is exceptional. I've been a loyal customer for three years, and I'm always amazed by the craftsmanship and attention to detail."</p>
-                    <h4>Priya Sharma</h4>
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="testimonial">
-                <div class="testimonial-image">
-                    <img src="assets/images/customer2.jpg" alt="Customer 2">
-                </div>
-                <div class="testimonial-content">
-                    <p>"I purchased an Ikkat silk saree for my wedding and received countless compliments. The colors were vibrant and the fabric was luxurious. Highly recommended!"</p>
-                    <h4>Ananya Patel</h4>
-                    <div class="rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="testimonial-dots">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-        </div>
-    </section> -->
 
     <section class="subscribe">
         <div class="subscribe-content">
@@ -304,4 +236,8 @@
                 <i class="fab fa-cc-amex"></i>
             </div>
         </div>
-        </footer>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
