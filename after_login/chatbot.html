@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>WeaveKart - Handloom Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .chatbot-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            font-size: 32px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .chatbot-interface {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .input-group label {
+            font-weight: 500;
+            color: #333;
+            font-size: 15px;
+        }
+        
+        .input-group textarea, 
+        .input-group select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .input-group select {
+            min-height: auto;
+            cursor: pointer;
+        }
+        
+        .submit-button {
+            background-color: #603b88;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 200px;
+            margin-top: 10px;
+        }
+        
+        .submit-button:hover {
+            background-color: #4e2e70;
+            transform: translateY(-2px);
+        }
+        
+        .result-box {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 10px;
+            min-height: 150px;
+            max-height: 350px;
+            overflow-y: auto;
+        }
+        
+        .result-box.empty {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-style: italic;
+        }
+        
+        .options-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .option-chip {
+            background-color: #f0e6ff;
+            color: #603b88;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+        
+        .option-chip:hover, .option-chip.active {
+            background-color: #603b88;
+            color: white;
+            border-color: #603b88;
+        }
+        
+        .chat-message {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .chat-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .message-content {
+            background-color: #f0f0f0;
+            padding: 12px 15px;
+            border-radius: 10px;
+            max-width: 80%;
+            line-height: 1.5;
+        }
+        
+        .message-bot .message-content {
+            background-color: #f0e6ff;
+        }
+        
+        .message-user {
+            flex-direction: row-reverse;
+        }
+        
+        .message-user .chat-avatar {
+            margin-right: 0;
+            margin-left: 15px;
+        }
+        
+        .message-user .message-content {
+            background-color: #e0f7fa;
+        }
+        
+        .chat-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .typing-indicator {
+            color: #888;
+            font-style: italic;
+            font-size: 14px;
+        }
+        
+        .clear-chat {
+            color: #f44336;
+            cursor: pointer;
+            font-size: 14px;
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            transition: all 0.2s ease;
+            border-radius: 5px;
+        }
+        
+        .clear-chat:hover {
+            background-color: #ffebee;
+        }
+        
+        @media (max-width: 768px) {
+            .chatbot-interface {
+                padding: 15px;
+            }
+            
+            .options-row {
+                margin-top: 10px;
+            }
+            
+            .message-content {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo">
+                <img src="assets/images/weavekart_logo.jpg" alt="WeaveKart Logo">
+                <h1>WeaveKart</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for handloom products...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="user-actions">
+                <!-- Changed from login/signup to account dashboard -->
+                <a href="my-account.html"><i class="fas fa-user"></i> My Account</a>
+                <a href="logout.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist <span class="badge">3</span></a>
+                <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart <span class="badge">2</span></a>
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" >Home</a></li>
+                <li><a href="fabrics.html">Fabrics</a></li>
+                <li><a href="new-arrivals.html">New Arrivals</a></li>
+                <li><a href="chatbot.html" class="active">Chatbot</a></li>
+                <li><a href="chat_with_weaver.html">Chat with weaver</a></li>
+                <li><a href="ourstory.html">Our story</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="chatbot-container">
+        <h2 class="page-title">Handloom Assistant</h2>
+        <p class="page-subtitle">Get personalized handloom recommendations and information based on your preferences, occasions, and seasons</p>
+        
+        <div class="chatbot-interface">
+            <div class="options-row">
+                <div class="option-chip">Wedding Season</div>
+                <div class="option-chip">Festival Wear</div>
+                <div class="option-chip">Summer Collection</div>
+                <div class="option-chip">Winter Styles</div>
+                <div class="option-chip">Office Wear</div>
+                <div class="option-chip">Casual Wear</div>
+            </div>
+            
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="query-input">Tell us what you're looking for:</label>
+                    <textarea id="query-input" placeholder="Describe the occasion, season, color preferences, or any specific requirements for your handloom needs..."></textarea>
+                </div>
+                
+                <div class="input-group">
+                    <label for="price-range">Price Range:</label>
+                    <select id="price-range">
+                        <option value="">Select your budget</option>
+                        <option value="budget">Budget (Under ₹3,000)</option>
+                        <option value="mid-range">Mid-range (₹3,000 - ₹8,000)</option>
+                        <option value="premium">Premium (₹8,000 - ₹15,000)</option>
+                        <option value="luxury">Luxury (Above ₹15,000)</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="fabric-preference">Preferred Fabric:</label>
+                    <select id="fabric-preference">
+                        <option value="">Choose fabric type</option>
+                        <option value="silk">Silk</option>
+                        <option value="cotton">Cotton</option>
+                        <option value="linen">Linen</option>
+                        <option value="ikkat">Ikkat</option>
+                        <option value="banarasi">Banarasi</option>
+                        <option value="kanjeevaram">Kanjeevaram</option>
+                        <option value="any">No Preference</option>
+                    </select>
+                </div>
+                
+                <button id="submit-query" class="submit-button">
+                    <i class="fas fa-paper-plane"></i> Get Recommendations
+                </button>
+            </div>
+            
+            <h3>Recommendations</h3>
+            <div id="result-container" class="result-box empty">
+                Your personalized recommendations will appear here
+            </div>
+            
+            <div class="chat-controls">
+                <span class="typing-indicator" style="display: none;">Handloom Assistant is thinking...</span>
+                <button class="clear-chat">
+                    <i class="fas fa-trash-alt"></i> Clear Chat
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <section class="subscribe">
+        <div class="subscribe-content">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for exclusive offers, new arrivals, and artisan stories</p>
+            <form class="subscribe-form">
+                <input type="email" placeholder="Your Email Address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>WeaveKart</h3>
+                <p>Empowering artisans and bringing authentic handloom products to customers worldwide since 2018.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="our-story.html">Our Story</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Care</h3>
+                <ul>
+                    <li><a href="shipping.html">Shipping Policy</a></li>
+                    <li><a href="returns.html">Return & Exchange</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Craft Street, Textile Hub, Chennai, Tamil Nadu, India</li>
+                    <li><i class="fas fa-phone"></i> +91 98765 43210</li>
+                    <li><i class="fas fa-envelope"></i> support@weavekart.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 WeaveKart. All Rights Reserved.</p>
+            <div class="payment-icons">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-cc-amex"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const optionChips = document.querySelectorAll('.option-chip');
+            const queryInput = document.getElementById('query-input');
+            const submitButton = document.getElementById('submit-query');
+            const resultContainer = document.getElementById('result-container');
+            const clearChatButton = document.querySelector('.clear-chat');
+            const typingIndicator = document.querySelector('.typing-indicator');
+            
+            // Quick option chips functionality
+            optionChips.forEach(chip => {
+                chip.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    updateQueryInputFromChips();
+                });
+            });
+            
+            function updateQueryInputFromChips() {
+                const activeChips = document.querySelectorAll('.option-chip.active');
+                let chipTexts = Array.from(activeChips).map(chip => chip.textContent);
+                
+                if (chipTexts.length > 0) {
+                    let currentText = queryInput.value.trim();
+                    if (currentText) {
+                        // Append to existing text if there's any
+                        queryInput.value = currentText + "\n\nInterested in: " + chipTexts.join(', ');
+                    } else {
+                        // Set new text if empty
+                        queryInput.value = "I'm looking for recommendations for " + chipTexts.join(', ');
+                    }
+                }
+            }
+            
+            // Submit button functionality
+            submitButton.addEventListener('click', function() {
+                const queryText = queryInput.value.trim();
+                const priceRange = document.getElementById('price-range').value;
+                const fabricPreference = document.getElementById('fabric-preference').value;
+                
+                if (!queryText) {
+                    alert('Please describe what you are looking for');
+                    return;
+                }
+                
+                // Show typing indicator
+                typingIndicator.style.display = 'block';
+                resultContainer.classList.remove('empty');
+                
+                // Simulate response delay
+                setTimeout(() => {
+                    generateResponse(queryText, priceRange, fabricPreference);
+                    typingIndicator.style.display = 'none';
+                }, 1500);
+            });
+            
+            function generateResponse(query, priceRange, fabric) {
+                // Clear "empty" message
+                if (resultContainer.classList.contains('empty')) {
+                    resultContainer.innerHTML = '';
+                    resultContainer.classList.remove('empty');
+                }
+                
+                // Add user message
+                const userMessage = document.createElement('div');
+                userMessage.className = 'chat-message message-user';
+                userMessage.innerHTML = `
+                    <div class="chat-avatar">
+                        <img src="assets/images/user-avatar.jpg" alt="You">
+                    </div>
+                    <div class="message-content">
+                        ${query}
+                        ${priceRange ? '<br><strong>Price Range:</strong> ' + document.getElementById('price-range').options[document.getElementById('price-range').selectedIndex].text : ''}
+                        ${fabric ? '<br><strong>Preferred Fabric:</strong> ' + document.getElementById('fabric-preference').options[document.getElementById('fabric-preference').selectedIndex].text : ''}
+                    </div>
+                `;
+                resultContainer.appendChild(userMessage);
+                
+                // Add chatbot response
+                const botMessage = document.createElement('div');
+                botMessage.className = 'chat-message message-bot';
+                
+                // Generate custom response based on inputs
+                let responseText = generateCustomResponse(query, priceRange, fabric);
+                
+                botMessage.innerHTML = `
+                    <div class="chat-avatar">
+                        <img src="assets/images/assistant-avatar.jpg" alt="Handloom Assistant">
+                    </div>
+                    <div class="message-content">
+                        ${responseText}
+                    </div>
+                `;
+                resultContainer.appendChild(botMessage);
+                
+                // Scroll to the bottom of results
+                resultContainer.scrollTop = resultContainer.scrollHeight;
+            }
+            
+            function generateCustomResponse(query, priceRange, fabric) {
+                // This is a simplified response generation
+                // In a real application, this would connect to a backend service
+                
+                let response = '';
+                
+                // Check for occasion-based keywords
+                if (query.toLowerCase().includes('wedding') || query.toLowerCase().includes('bridal')) {
+                    response = `<strong>Based on your wedding needs, I recommend:</strong><br><br>
+                    1. <strong>Kanjeevaram Silk Saree</strong> - Our bridal collection features exquisite gold zari work perfect for wedding ceremonies.<br><br>
+                    2. <strong>Banarasi Silk</strong> - Timeless elegance with intricate patterns that are ideal for special occasions.<br><br>
+                    3. <strong>Traditional Red Resham Silk Saree</strong> - A classic bridal choice with modern aesthetics.`;
+                }
+                else if (query.toLowerCase().includes('festival') || query.toLowerCase().includes('diwali') || query.toLowerCase().includes('puja')) {
+                    response = `<strong>For festival celebrations, these handloom options would be perfect:</strong><br><br>
+                    1. <strong>Ikkat Cotton-Silk Blend</strong> - Comfortable yet festive with traditional patterns.<br><br>
+                    2. <strong>Chanderi Silk Saree</strong> - Light weight with a subtle sheen, perfect for festival gatherings.<br><br>
+                    3. <strong>Block Print Cotton Sarees</strong> - Vibrant colors that celebrate the festive spirit while ensuring comfort.`;
+                }
+                else if (query.toLowerCase().includes('summer') || query.toLowerCase().includes('hot')) {
+                    response = `<strong>For the summer season, I suggest these breathable options:</strong><br><br>
+                    1. <strong>Linen Sarees</strong> - Exceptionally breathable and perfect for hot weather.<br><br>
+                    2. <strong>Cotton Handloom with Natural Dyes</strong> - Skin-friendly and keeps you cool throughout the day.<br><br>
+                    3. <strong>Lightweight Mangalgiri Cotton</strong> - Known for its durability and comfort in summer months.`;
+                }
+                else if (query.toLowerCase().includes('winter') || query.toLowerCase().includes('cold')) {
+                    response = `<strong>For winter wear, consider these warmer handloom options:</strong><br><br>
+                    1. <strong>Wool-Silk Blend Sarees</strong> - Provides warmth while maintaining elegance.<br><br>
+                    2. <strong>Tussar Silk with Embroidery</strong> - Slightly heavier texture perfect for winter occasions.<br><br>
+                    3. <strong>Bhagalpuri Silk</strong> - Rich texture that's ideal for cooler weather conditions.`;
+                }
+                else if (query.toLowerCase().includes('office') || query.toLowerCase().includes('work') || query.toLowerCase().includes('professional')) {
+                    response = `<strong>For office and professional settings, these handloom options are suitable:</strong><br><br>
+                    1. <strong>Cotton-Linen Blend Sarees</strong> - Professional look with comfort for all-day wear.<br><br>
+                    2. <strong>Subtle Pochampally Ikkat</strong> - Geometric patterns that look sophisticated for work environments.<br><br>
+                    3. <strong>Maheshwari Cotton-Silk</strong> - Elegant without being overstated, perfect for corporate settings.`;
+                }
+                else {
+                    response = `<strong>Based on your preferences, here are some recommendations:</strong><br><br>
+                    1. <strong>Handwoven Cotton-Silk Blend</strong> - Versatile for various occasions with a perfect balance of comfort and elegance.<br><br>
+                    2. <strong>Traditional Handloom with Contemporary Designs</strong> - Fusion styles that work for multiple settings.<br><br>
+                    3. <strong>Lightweight Pochampally</strong> - Beautiful patterns that can be dressed up or down as needed.`;
+                }
+                
+                // Add price-specific recommendations
+                if (priceRange === 'budget') {
+                    response += `<br><br><strong>Budget-Friendly Options:</strong><br>
+                    • Check out our cotton handloom collection starting at ₹1,499<br>
+                    • Special discount on last season's designs`;
+                } else if (priceRange === 'luxury') {
+                    response += `<br><br><strong>Luxury Collection:</strong><br>
+                    • Our heritage collection features rare weaving techniques<br>
+                    • Exclusive designer collaborations available by appointment`;
+                }
+                
+                // Add fabric-specific note
+                if (fabric && fabric !== 'any') {
+                    response += `<br><br><strong>About ${fabric.charAt(0).toUpperCase() + fabric.slice(1)} Fabrics:</strong><br>
+                    We source our ${fabric} directly from master weavers who specialize in traditional techniques. Each piece undergoes strict quality checks before reaching our store.`;
+                }
+                
+                // Add closing and call to action
+                response += `<br><br>Would you like to see specific products matching these recommendations? I can direct you to our collections page.`;
+                
+                return response;
+            }
+            
+            // Clear chat functionality
+            clearChatButton.addEventListener('click', function() {
+                resultContainer.innerHTML = 'Your personalized recommendations will appear here';
+                resultContainer.classList.add('empty');
+                queryInput.value = '';
+                document.getElementById('price-range').selectedIndex = 0;
+                document.getElementById('fabric-preference').selectedIndex = 0;
+                
+                // Reset all active chips
+                optionChips.forEach(chip => {
+                    chip.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
