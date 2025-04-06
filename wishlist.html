@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeaveKart - Wishlist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: #ff7f27;
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .search-bar {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+        }
+        
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .header-icons {
+            display: flex;
+        }
+        
+        .header-icon {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .icon-text {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        /* Sidebar styles */
+        .main-content {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-right: 20px;
+        }
+        
+        .user-profile {
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+        
+        .user-img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        
+        .user-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .user-email {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 0;
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            color: #ff7f27;
+        }
+        
+        .sidebar-menu a i {
+            margin-right: 10px;
+            width: 20px;
+        }
+        
+        /* Wishlist content styles */
+        .content {
+            flex-grow: 1;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .content-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        .wishlist-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .wishlist-item {
+            border: 1px solid #eee;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        
+        .wishlist-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .wishlist-product-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background-color: #f0f0f0;
+        }
+        
+        .wishlist-product-details {
+            padding: 15px;
+        }
+        
+        .wishlist-product-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        
+        .wishlist-product-desc {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .wishlist-product-price {
+            font-weight: bold;
+            color: #ff7f27;
+            margin-bottom: 15px;
+        }
+        
+        .wishlist-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .wishlist-btn {
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .move-to-cart {
+            background-color: #ff7f27;
+            color: white;
+            border: none;
+        }
+        
+        .move-to-cart:hover {
+            background-color: #e66a1a;
+        }
+        
+        .remove-item {
+            background-color: white;
+            border: 1px solid #ddd;
+            color: #666;
+        }
+        
+        .remove-item:hover {
+            border-color: #ff7f27;
+            color: #ff7f27;
+        }
+        
+        .empty-wishlist {
+            text-align: center;
+            padding: 40px 0;
+            grid-column: 1 / -1;
+        }
+        
+        .empty-wishlist i {
+            font-size: 48px;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+        
+        .empty-wishlist h3 {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .empty-wishlist p {
+            color: #999;
+            margin-bottom: 20px;
+        }
+        
+        .browse-btn {
+            padding: 10px 20px;
+            background-color: #ff7f27;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        /* Footer styles */
+        footer {
+            margin-top: 40px;
+            background-color: white;
+            padding: 30px 0;
+            border-top: 1px solid #eee;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-section {
+            flex: 1;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .wishlist-items {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="dashboard.html" class="logo">WeaveKart</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products, brands and more">
+                <button type="button"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="header-icons">
+                <a href="cart.html" class="header-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="icon-text">Cart</span>
+                </a>
+                <a href="dashboard.html" class="header-icon">
+                    <i class="fas fa-user"></i>
+                    <span class="icon-text">Profile</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="user-profile">
+                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <img src="user-icon.png" alt="User Profile" class="user-img">
+                        <span class="user-name">Priya</span>
+                    </div>
+                    <div class="user-email">priya18@gmail.com</div>
+                </div>
+
+                <ul class="sidebar-menu">
+                    <li><a href="dashboard.html"><i class="fas fa-user"></i> My Profile</a></li>
+                    <li><a href="orders.html"><i class="fas fa-shopping-bag"></i> Orders</a></li>
+                    <li><a href="wishlist.html" class="active"><i class="fas fa-heart"></i> Wishlist</a></li>
+                    <li><a href="addresses.html"><i class="fas fa-map-marker-alt"></i> Addresses</a></li>
+                    <li><a href="payments.html"><i class="fas fa-credit-card"></i> Payments</a></li>
+                    <li><a href="rewards.html"><i class="fas fa-gift"></i> Rewards</a></li>
+                    <li><a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                </ul>
+            </div>
+
+            <!-- Wishlist Content -->
+            <div class="content">
+                <div class="content-header">
+                    <h2 class="content-title">My Wishlist</h2>
+                </div>
+
+                <div class="wishlist-items" id="wishlistItems">
+                    <!-- Wishlist Item 1 -->
+                    <div class="wishlist-item">
+                        <img src="handwoven-saree.jpg" alt="Handwoven Cotton Saree" class="wishlist-product-img">
+                        <div class="wishlist-product-details">
+                            <div class="wishlist-product-title">Handwoven Cotton Saree</div>
+                            <div class="wishlist-product-desc">Elegant and eco-friendly</div>
+                            <div class="wishlist-product-price">₹2,499</div>
+                            <div class="wishlist-actions">
+                                <button class="wishlist-btn move-to-cart">Move to Cart</button>
+                                <button class="wishlist-btn remove-item">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist Item 2 -->
+                    <div class="wishlist-item">
+                        <img src="silk-kurta.jpg" alt="Traditional Silk Kurta" class="wishlist-product-img">
+                        <div class="wishlist-product-details">
+                            <div class="wishlist-product-title">Traditional Silk Kurta</div>
+                            <div class="wishlist-product-desc">Festive wear special</div>
+                            <div class="wishlist-product-price">₹1,799</div>
+                            <div class="wishlist-actions">
+                                <button class="wishlist-btn move-to-cart">Move to Cart</button>
+                                <button class="wishlist-btn remove-item">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About WeaveKart</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Our Stories</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Help</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Payments</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Cancellation & Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Social</h3>
+                <div class="social-icons">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- JavaScript -->
+    <script>
+        // Wishlist items data
+        const wishlistItems = [
+            {
+                id: "WK-WL-001",
+                title: "Handwoven Cotton Saree",
+                image: "handwoven-saree.jpg",
+                desc: "Elegant and eco-friendly",
+                price: 2499
+            },
+            {
+                id: "WK-WL-002",
+                title: "Traditional Silk Kurta",
+                image: "silk-kurta.jpg",
+                desc: "Festive wear special",
+                price: 1799
+            }
+        ];
+
+        // DOM elements
+        const wishlistContainer = document.getElementById('wishlistItems');
+        const searchInput = document.querySelector('.search-bar input');
+        const searchButton = document.querySelector('.search-bar button');
+
+        // Format currency
+        function formatCurrency(amount) {
+            return '₹' + amount.toLocaleString('en-IN');
+        }
+
+        // Display wishlist items
+        function displayWishlist(items = wishlistItems) {
+            wishlistContainer.innerHTML = '';
+            
+            if (items.length === 0) {
+                wishlistContainer.innerHTML = `
+                    <div class="empty-wishlist">
+                        <i class="fas fa-heart"></i>
+                        <h3>Your Wishlist is Empty</h3>
+                        <p>You haven't added any products to your wishlist yet.</p>
+                        <button class="browse-btn">Browse Products</button>
+                    </div>
+                `;
+                return;
+            }
+            
+            items.forEach(item => {
+                const wishlistItem = document.createElement('div');
+                wishlistItem.className = 'wishlist-item';
+                wishlistItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="wishlist-product-img">
+                    <div class="wishlist-product-details">
+                        <div class="wishlist-product-title">${item.title}</div>
+                        <div class="wishlist-product-desc">${item.desc}</div>
+                        <div class="wishlist-product-price">${formatCurrency(item.price)}</div>
+                        <div class="wishlist-actions">
+                            <button class="wishlist-btn move-to-cart" data-id="${item.id}">Move to Cart</button>
+                            <button class="wishlist-btn remove-item" data-id="${item.id}">Remove</button>
+                        </div>
+                    </div>
+                `;
+                wishlistContainer.appendChild(wishlistItem);
+            });
+            
+            // Add event listeners to buttons
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const itemId = this.getAttribute('data-id');
+                    removeFromWishlist(itemId);
+                });
+            });
+            
+            document.querySelectorAll('.move-to-cart').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const itemId = this.getAttribute('data-id');
+                    moveToCart(itemId);
+                });
+            });
+        }
+
+        // Remove item from wishlist
+        function removeFromWishlist(itemId) {
+            const index = wishlistItems.findIndex(item => item.id === itemId);
+            if (index !== -1) {
+                wishlistItems.splice(index, 1);
+                displayWishlist();
+            }
+        }
+
+        // Move item to cart
+        function moveToCart(itemId) {
+            // In a real implementation, this would move the item to cart
+            alert(`Item ${itemId} moved to cart!`);
+            removeFromWishlist(itemId);
+        }
+
+        // Search functionality
+        function performSearch() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                displayWishlist();
+                return;
+            }
+            
+            const filteredItems = wishlistItems.filter(item => 
+                item.title.toLowerCase().includes(searchTerm) || 
+                item.desc.toLowerCase().includes(searchTerm)
+            );
+            
+            displayWishlist(filteredItems);
+        }
+
+        // Event listeners
+        searchButton.addEventListener('click', performSearch);
+        searchInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            displayWishlist();
+            
+            // Add event listener to browse button if empty state is shown
+            document.addEventListener('click', function(event) {
+                if (event.target.classList.contains('browse-btn')) {
+                    // In a real implementation, this would navigate to products page
+                    alert('Redirecting to products page');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

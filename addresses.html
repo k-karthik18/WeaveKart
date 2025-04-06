@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeaveKart - My Addresses</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: #ff7f27;
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .search-bar {
+            flex-grow: 1;
+            max-width: 500px;
+            margin: 0 20px;
+            position: relative;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+        }
+        
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .header-icons {
+            display: flex;
+        }
+        
+        .header-icon {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .icon-text {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        /* Sidebar styles */
+        .main-content {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-right: 20px;
+        }
+        
+        .user-profile {
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+        
+        .user-img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        
+        .user-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .user-email {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 0;
+        }
+        
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            color: #ff7f27;
+        }
+        
+        .sidebar-menu a i {
+            margin-right: 10px;
+            width: 20px;
+        }
+        
+        /* Addresses content styles */
+        .content {
+            flex-grow: 1;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .content-title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        .add-address-btn {
+            padding: 8px 15px;
+            background-color: #ff7f27;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .add-address-btn i {
+            margin-right: 8px;
+        }
+        
+        .addresses-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .address-card {
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .address-card.default {
+            border: 1px solid #ff7f27;
+            background-color: #fff9f5;
+        }
+        
+        .address-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .default-badge {
+            background-color: #ff7f27;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        .address-details {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .address-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .address-action-btn {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .edit-btn {
+            background-color: white;
+            border: 1px solid #ddd;
+            color: #666;
+        }
+        
+        .edit-btn:hover {
+            border-color: #ff7f27;
+            color: #ff7f27;
+        }
+        
+        .remove-btn {
+            background-color: white;
+            border: 1px solid #ddd;
+            color: #666;
+        }
+        
+        .remove-btn:hover {
+            border-color: #ff5252;
+            color: #ff5252;
+        }
+        
+        .set-default-btn {
+            background-color: white;
+            border: 1px solid #ddd;
+            color: #666;
+        }
+        
+        .set-default-btn:hover {
+            border-color: #4caf50;
+            color: #4caf50;
+        }
+        
+        .no-addresses {
+            text-align: center;
+            padding: 40px 0;
+            grid-column: 1 / -1;
+        }
+        
+        .no-addresses i {
+            font-size: 48px;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+        
+        .no-addresses h3 {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .no-addresses p {
+            color: #999;
+            margin-bottom: 20px;
+        }
+        
+        /* Address Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 5px;
+            width: 50%;
+            max-width: 600px;
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from {opacity: 0; transform: translateY(-20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        
+        .close-btn {
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+        }
+        
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .cancel-btn {
+            padding: 8px 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .save-btn {
+            padding: 8px 15px;
+            background-color: #ff7f27;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        /* Footer styles */
+        footer {
+            margin-top: 40px;
+            background-color: white;
+            padding: 30px 0;
+            border-top: 1px solid #eee;
+        }
+        
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-section {
+            flex: 1;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #666;
+            text-decoration: none;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .addresses-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 90%;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <a href="dashboard.html" class="logo">WeaveKart</a>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for products, brands and more">
+                <button type="button"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="header-icons">
+                <a href="cart.html" class="header-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="icon-text">Cart</span>
+                </a>
+                <a href="dashboard.html" class="header-icon">
+                    <i class="fas fa-user"></i>
+                    <span class="icon-text">Profile</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="user-profile">
+                    <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                        <img src="user-icon.png" alt="User Profile" class="user-img">
+                        <span class="user-name">Priya</span>
+                    </div>
+                    <div class="user-email">priya18@gmail.com</div>
+                </div>
+
+                <ul class="sidebar-menu">
+                    <li><a href="dashboard.html"><i class="fas fa-user"></i> My Profile</a></li>
+                    <li><a href="orders.html"><i class="fas fa-shopping-bag"></i> Orders</a></li>
+                    <li><a href="wishlist.html"><i class="fas fa-heart"></i> Wishlist</a></li>
+                    <li><a href="addresses.html" class="active"><i class="fas fa-map-marker-alt"></i> Addresses</a></li>
+                    <li><a href="payments.html"><i class="fas fa-credit-card"></i> Payments</a></li>
+                    <li><a href="rewards.html"><i class="fas fa-gift"></i> Rewards</a></li>
+                    <li><a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                </ul>
+            </div>
+
+            <!-- Addresses Content -->
+            <div class="content">
+                <div class="content-header">
+                    <h2 class="content-title">My Addresses</h2>
+                    <button class="add-address-btn" id="addAddressBtn">
+                        <i class="fas fa-plus"></i> Add New Address
+                    </button>
+                </div>
+
+                <div class="addresses-container" id="addressesContainer">
+                    <!-- Address Card 1 (Default) -->
+                    <div class="address-card default">
+                        <div class="address-name">
+                            Home Address
+                            <span class="default-badge">Default</span>
+                        </div>
+                        <div class="address-details">
+                            Priya Singh<br>
+                            123 Main Street, Apartment 4B<br>
+                            Mumbai, Maharashtra 400001<br>
+                            India<br>
+                            Phone: +91 9876543210
+                        </div>
+                        <div class="address-actions">
+                            <button class="address-action-btn edit-btn" data-address-id="1">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="address-action-btn remove-btn" data-address-id="1">
+                                <i class="fas fa-trash"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Address Card 2 -->
+                    <div class="address-card">
+                        <div class="address-name">
+                            Work Address
+                        </div>
+                        <div class="address-details">
+                            Priya Singh<br>
+                            WeaveKart Office, 5th Floor<br>
+                            Tech Park, Andheri East<br>
+                            Mumbai, Maharashtra 400093<br>
+                            Phone: +91 9876543210
+                        </div>
+                        <div class="address-actions">
+                            <button class="address-action-btn edit-btn" data-address-id="2">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="address-action-btn remove-btn" data-address-id="2">
+                                <i class="fas fa-trash"></i> Remove
+                            </button>
+                            <button class="address-action-btn set-default-btn" data-address-id="2">
+                                <i class="fas fa-check-circle"></i> Set Default
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Address Modal -->
+    <div id="addressModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Add New Address</h3>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addressForm">
+                    <input type="hidden" id="addressId">
+                    <div class="form-group">
+                        <label class="form-label" for="addressName">Address Name</label>
+                        <input type="text" id="addressName" class="form-input" placeholder="e.g. Home, Work, etc.">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="firstName">First Name</label>
+                            <input type="text" id="firstName" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="lastName">Last Name</label>
+                            <input type="text" id="lastName" class="form-input">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="addressLine1">Address Line 1</label>
+                        <input type="text" id="addressLine1" class="form-input" placeholder="Street address, P.O. box, company name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="addressLine2">Address Line 2 (Optional)</label>
+                        <input type="text" id="addressLine2" class="form-input" placeholder="Apartment, suite, unit, building, floor, etc.">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="city">City</label>
+                            <input type="text" id="city" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="state">State</label>
+                            <input type="text" id="state" class="form-input">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="zipCode">ZIP Code</label>
+                            <input type="text" id="zipCode" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="country">Country</label>
+                            <select id="country" class="form-input">
+                                <option value="India">India</option>
+                                <option value="USA">United States</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="Canada">Canada</option>
+                                <option value="Australia">Australia</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-input">
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="setAsDefault">
+                        <label for="setAsDefault">Set as default address</label>
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+                        <button type="submit" class="save-btn">Save Address</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>About WeaveKart</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Our Stories</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Help</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Payments</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Cancellation & Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Social</h3>
+                <div class="social-icons">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- JavaScript -->
+    <script>
+        // Sample address data
+        const addresses = [
+            {
+                id: 1,
+                name: "Home Address",
+                firstName: "Priya",
+                lastName: "Singh",
+                line1: "123 Main Street, Apartment 4B",
+                line2: "",
+                city: "Mumbai",
+                state: "Maharashtra",
+                zip: "400001",
+                country: "India",
+                phone: "+91 9876543210",
+                isDefault: true
+            },
+            {
+                id: 2,
+                name: "Work Address",
+                firstName: "Priya",
+                lastName: "Singh",
+                line1: "WeaveKart Office, 5th Floor",
+                line2: "Tech Park, Andheri East",
+                city: "Mumbai",
+                state: "Maharashtra",
+                zip: "400093",
+                country: "India",
+                phone: "+91 9876543210",
+                isDefault: false
+            }
+        ];
+
+        // DOM elements
+        const addAddressBtn = document.getElementById('addAddressBtn');
+        const addressesContainer = document.getElementById('addressesContainer');
+        const addressModal = document.getElementById('addressModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const addressForm = document.getElementById('addressForm');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const closeBtn = document.querySelector('.close-btn');
+        const searchInput = document.querySelector('.search-bar input');
+        const searchButton = document.querySelector('.search-bar button');
+
+        // Display addresses
+        function displayAddresses() {
+            addressesContainer.innerHTML = '';
+            
+            if (addresses.length === 0) {
+                addressesContainer.innerHTML = `
+                    <div class="no-addresses">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>No Addresses Saved</h3>
+                        <p>You haven't added any addresses yet.</p>
+                        <button class="add-address-btn" id="addAddressEmptyBtn">
+                            <i class="fas fa-plus"></i> Add New Address
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            addresses.forEach(address => {
+                const addressCard = document.createElement('div');
+                addressCard.className = `address-card ${address.isDefault ? 'default' : ''}`;
+                
+                addressCard.innerHTML = `
+                    <div class="address-name">
+                        ${address.name}
+                        ${address.isDefault ? '<span class="default-badge">Default</span>' : ''}
+                    </div>
+                    <div class="address-details">
+                        ${address.firstName} ${address.lastName}<br>
+                        ${address.line1}<br>
+                        ${address.line2 ? address.line2 + '<br>' : ''}
+                        ${address.city}, ${address.state} ${address.zip}<br>
+                        ${address.country}<br>
+                        Phone: ${address.phone}
+                    </div>
+                    <div class="address-actions">
+                        <button class="address-action-btn edit-btn" data-address-id="${address.id}">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="address-action-btn remove-btn" data-address-id="${address.id}">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                        ${!address.isDefault ? `
+                        <button class="address-action-btn set-default-btn" data-address-id="${address.id}">
+                            <i class="fas fa-check-circle"></i> Set Default
+                        </button>
+                        ` : ''}
+                    </div>
+                `;
+                
+                addressesContainer.appendChild(addressCard);
+            });
+            
+            // Add event listeners to buttons
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const addressId = parseInt(this.getAttribute('data-address-id'));
+                    editAddress(addressId);
+                });
+            });
+            
+            document.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const addressId = parseInt(this.getAttribute('data-address-id'));
+                    removeAddress(addressId);
+                });
+            });
+            
+            document.querySelectorAll('.set-default-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const addressId = parseInt(this.getAttribute('data-address-id'));
+                    setDefaultAddress(addressId);
+                });
+            });
+        }
+
+        // Open modal for adding new address
+        function openAddAddressModal() {
+            document.getElementById('addressId').value = '';
+            document.getElementById('addressName').value = '';
+            document.getElementById('firstName').value = '';
+            document.getElementById('lastName').value = '';
+            document.getElementById('addressLine1').value = '';
+            document.getElementById('addressLine2').value = '';
+            document.getElementById('city').value = '';
+            document.getElementById('state').value = '';
+            document.getElementById('zipCode').value = '';
+            document.getElementById('country').value = 'India';
+            document.getElementById('phone').value = '';
+            document.getElementById('setAsDefault').checked = false;
+            
+            modalTitle.textContent = 'Add New Address';
+            addressModal.style.display = 'block';
+        }
+
+        // Edit address
+        function editAddress(addressId) {
+            const address = addresses.find(addr => addr.id === addressId);
+            if (!address) return;
+            
+            document.getElementById('addressId').value = address.id;
+            document.getElementById('addressName').value = address.name;
+            document.getElementById('firstName').value = address.firstName;
+            document.getElementById('lastName').value = address.lastName;
+            document.getElementById('addressLine1').value = address.line1;
+            document.getElementById('addressLine2').value = address.line2;
+            document.getElementById('city').value = address.city;
+            document.getElementById('state').value = address.state;
+            document.getElementById('zipCode').value = address.zip;
+            document.getElementById('country').value = address.country;
+            document.getElementById('phone').value = address.phone;
+            document.getElementById('setAsDefault').checked = address.isDefault;
+            
+            modalTitle.textContent = 'Edit Address';
+            addressModal.style.display = 'block';
+        }
+
+        // Save address (add or update)
+        function saveAddress(e) {
+            e.preventDefault();
+            
+            const addressId = document.getElementById('addressId').value;
+            const isNew = addressId === '';
+            
+            const address = {
+                id: isNew ? Date.now() : parseInt(addressId),
+                name: document.getElementById('addressName').value,
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                line1: document.getElementById('addressLine1').value,
+                line2: document.getElementById('addressLine2').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                zip: document.getElementById('zipCode').value,
+                country: document.getElementById('country').value,
+                phone: document.getElementById('phone').value,
+                isDefault: document.getElementById('setAsDefault').checked
+            };
+            
+            if (address.isDefault) {
+                // Remove default status from other addresses
+                addresses.forEach(addr => {
+                    addr.isDefault = false;
+                });
+            }
+            
+            if (isNew) {
+                addresses.push(address);
+            } else {
+                const index = addresses.findIndex(addr => addr.id === address.id);
+                if (index !== -1) {
+                    addresses[index] = address;
+                }
+            }
+            
+            displayAddresses();
+            closeModal();
+        }
+
+        // Remove address
+        function removeAddress(addressId) {
+            if (confirm('Are you sure you want to remove this address?')) {
+                const index = addresses.findIndex(addr => addr.id === addressId);
+                if (index !== -1) {
+                    const wasDefault = addresses[index].isDefault;
+                    addresses.splice(index, 1);
+                    
+                    // If we removed the default address, set the first one as default
+                    if (wasDefault && addresses.length > 0) {
+                        addresses[0].isDefault = true;
+                    }
+                    
+                    displayAddresses();
+                }
+            }
+        }
+
+        // Set default address
+        function setDefaultAddress(addressId) {
+            addresses.forEach(addr => {
+                addr.isDefault = addr.id === addressId;
+            });
+            displayAddresses();
+        }
+
+        // Close modal
+        function closeModal() {
+            addressModal.style.display = 'none';
+        }
+
+        // Event listeners
+        addAddressBtn.addEventListener('click', openAddAddressModal);
+        addressForm.addEventListener('submit', saveAddress);
+        cancelBtn.addEventListener('click', closeModal);
+        closeBtn.addEventListener('click', closeModal);
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === addressModal) {
+                closeModal();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            displayAddresses();
+            
+            // Add event listener for add address button in empty state
+            document.addEventListener('click', function(e) {
+                if (e.target.id === 'addAddressEmptyBtn' || e.target.closest('#addAddressEmptyBtn')) {
+                    openAddAddressModal();
+                }
+            });
+        });
+
+        // Search functionality (placeholder - would search by address name in a real implementation)
+        function performSearch() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            console.log('Searching for:', searchTerm);
+            // In a real implementation, you would filter addresses here
+        }
+
+        searchButton.addEventListener('click', performSearch);
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    </script>
+</body>
+</html>

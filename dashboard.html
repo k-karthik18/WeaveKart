@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeaveKart Profile Dashboard</title>
+    <link rel="stylesheet" href="assets\css\dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<script src="assets\js\dashboard.js"></script>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="logo">
+                <h1>WeaveKart</h1>
+            </div>
+            <div class="search-bar">
+                <input style="background-color: white;" type="text" placeholder="Search for products, brands and more">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="header-right">
+                <div class="header-icons">
+                    <a href="cart.html" class="header-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="icon-text">Cart</span>
+                    </a>
+                <a href="dashboard.html" class="header-icon">
+                    <i class="fas fa-user"></i>
+                    <span class="icon-text">Profile</span>
+                </a>
+            </div>
+        </header>
+
+        <!-- Main Content Section -->
+        <main class="main-content">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <img src="/api/placeholder/150/150" alt="User Profile">
+                    </div>
+                    <div class="user-details">
+                        <h3>Priya</h3>
+                        <p>priya18@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="dashboard.html" class="nav-link active">
+                        <i class="fas fa-user-circle"></i>
+                        <span>My Profile</span>
+                    </a>
+                    <a href="orders.html" class="nav-link">
+                        <i class="fas fa-box"></i>
+                        <span>Orders</span>
+                    </a>
+                    <a href="wishlist.html" class="nav-link">
+                        <i class="fas fa-heart"></i>
+                        <span>Wishlist</span>
+                    </a>
+                    <a href="addresses.html" class="nav-link">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Addresses</span>
+                    </a>
+                    <a href="payments.html" class="nav-link">
+                        <i class="fas fa-wallet"></i>
+                        <span>Payments</span>
+                    </a>
+                    <a href="rewards.html" class="nav-link">
+                        <i class="fas fa-gift"></i>
+                        <span>Rewards</span>
+                    </a>
+                    <a href="notifications.html" class="nav-link">
+                        <i class="fas fa-bell"></i>
+                        <span>Notifications</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Profile Content -->
+            <div class="profile-content">
+                <div class="section-header">
+                    <h2>Personal Information</h2>
+                    <button class="edit-btn">Edit</button>
+                </div>
+                
+                <div class="profile-form">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" value="Priya Singh" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" value="priya18@gmail.com" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Mobile Number</label>
+                        <input type="tel" value="+91 9876543210" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="gender" checked disabled> Female</label>
+                            <label><input type="radio" name="gender" disabled> Male</label>
+                            <label><input type="radio" name="gender" disabled> Other</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-header">
+                    <h2>Recent Orders</h2>
+                    <a href="orders.html" class="view-all">View All</a>
+                </div>
+                
+                <div class="orders-list">
+                    <div class="order-card">
+                        <div class="order-image">
+                            <img src="/api/placeholder/80/80" alt="Product">
+                        </div>
+                        <div class="order-details">
+                            <h4>Handwoven Cotton Saree</h4>
+                            <p>Order #WK123456 • April 2, 2025</p>
+                            <span class="status delivered">Delivered</span>
+                        </div>
+                        <div class="order-price">
+                            <p>₹2,499</p>
+                        </div>
+                    </div>
+                    
+                    <div class="order-card">
+                        <div class="order-image">
+                            <img src="/api/placeholder/80/80" alt="Product">
+                        </div>
+                        <div class="order-details">
+                            <h4>Traditional Silk Kurta</h4>
+                            <p>Order #WK123455 • March 28, 2025</p>
+                            <span class="status delivered">Delivered</span>
+                        </div>
+                        <div class="order-price">
+                            <p>₹1,799</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Footer Section -->
+        <footer class="footer">
+            <div class="footer-links">
+                <div class="footer-section">
+                    <h4>About WeaveKart</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Corporate Information</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Help</h4>
+                    <ul>
+                        <li><a href="#">Payments</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Cancellation & Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Social</h4>
+                    <ul class="social-icons">
+                        <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 WeaveKart. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
